@@ -1,0 +1,52 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Решение нелинейных уравнений</title>
+        <script src="../jquery.min.js"></script>
+        <script src="../knockout-2.0.0.js"></script>
+        <script src="MethodNewton.js"></script>
+        <script src="MethodBisection.js"></script>
+        <script src="viewModel.js"></script>
+        <link rel="stylesheet" type="text/css" href="../style.css" />
+        <style>
+            .range { width: 80px; margin-right: 64px; }
+            .answer { margin-right: 20px; font-weight: bold; }
+            #function { width: 600px; }
+            #description { color: red; margin-left: 20px; }
+        </style>
+    </head>
+	<body>
+      <figure>
+          <img src="../My-photo.png" alt="Maxim Baz" />
+          <figcaption>
+              <p>Максим Базь</p>
+              <p><a href="http://z0rch.com">http://z0rch.com</a></p>
+          </figcaption>
+      </figure>
+      <div id="header">
+        <h1>Решение нелинейных уравнений методами бисекции и Ньютона.</h1>
+        <h3>Для вычисления одного корня необходимо ввести исходную функцию и все начальные условия. <br />
+            Качество найденного решения проверяется подстановкой корня в исходную функцию.</h3>
+      </div>
+	    <p>Функция: <input id="function" data-bind="value: func, valueUpdate: 'afterkeydown'" /></p>
+	    <p>
+	        epsilon = <input data-bind="value: epsilon, valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	        h = <input data-bind="value: h, valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	        a = <input data-bind="value: a, valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	        b = <input data-bind="value: b, valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	    </p>
+        <br/>
+	    <p>
+	        Метод бисекции: <span data-bind="text: bisection" class="answer">0</span>
+	        Проверка подстановкой корня: <b>0 = <span data-bind="text: checkBisection">0</span></b>
+            <span data-bind="visible: Math.abs(checkBisection()) > 1" id="description">(ответ не найден на заданном промежутке)</span>
+	    </p>
+	    <p>Метод Ньютона: <span data-bind="text: newton" class="answer">0</span>Проверка подстановкой корня: <b>0 = <span data-bind="text: checkNewton">0</span></b></p>
+	    <script>
+	        $(function () {
+			    var viewModel = new ViewModel();
+                ko.applyBindings(viewModel);
+			});
+    	</script>
+	</body>
+</html>

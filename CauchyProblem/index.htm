@@ -1,0 +1,50 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Задача Коши</title>
+        <script src="..\jquery.min.js"></script>
+        <script src="..\knockout-2.0.0.js"></script>
+        <script src="MethodRungeKutti.js"></script>
+        <script src="MethodEiler.js"></script>
+        <script src="zoomViewModel.js"></script>
+        <script src="viewModel.js"></script>
+        <script src="GUI.js"></script>
+        <link rel="stylesheet" type="text/css" href="../style.css" />
+        <style>
+            .range { width: 40px; }
+            .function { width: 300px; margin-right: 40px; }
+            #analytic-label { margin-right: 20px; }
+            #function-label { margin-right: 32px; }
+        </style>
+    </head>
+	<body>
+      <figure>
+          <img src="../My-photo.png" alt="Maxim Baz" />
+          <figcaption>
+              <p>Максим Базь</p>
+              <p><a href="http://z0rch.com">http://z0rch.com</a></p>
+          </figcaption>
+      </figure>
+      <div id="header">
+        <h1>Решение задачи Коши методами Эйлера и Рунге-Кутты.</h1>
+        <h3>Для решения задачи коши необходимо ввести исходную функцию и все начальные условия.<br />
+        На графике зеленой ломаной обозначен результат вычисления <span class="green">методом Рунге-Кутты</span>, синей ломаной &mdash; <span class="blue">методом Эйлера</span>.</h3>
+      </div>
+	    <canvas id="graph" width="1000" height="500"></canvas>
+	    <p><span id="function-label">Исходная функция задачи Коши:</span> <input class="function" data-bind="value: func, valueUpdate: 'afterkeydown'" /></p>
+	    <p>
+	        v0 = <input data-bind="value: v0, valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	        x0 = <input data-bind="value: x0, valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	        xN = <input data-bind="value: xN, valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	        N =  <input data-bind="value: N,  valueUpdate: 'afterkeydown'" class="range" type="number"/>
+	    </p>
+	    <button data-bind="click: zoom.minus">-</button>
+        <button data-bind="click: zoom.plus">+</button>
+	    <script>
+	        $(function () {
+			    var viewModel = new ViewModel(new GUI($("#graph")[0]));
+                ko.applyBindings(viewModel);
+			});
+    	</script>
+	</body>
+</html>

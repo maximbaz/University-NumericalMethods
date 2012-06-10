@@ -1,0 +1,38 @@
+figure {
+    float: right;
+    margin: 0 5px;
+    border-radius: 10px;
+    border: 1px solid #DFDFDF;
+    padding: 10px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+figure p {
+    margin:0;
+}
+
+figure img {
+    border-radius: 10px;
+    height: 100px;
+}
+
+#header {
+    margin-bottom: 50px;
+}
+
+.red {
+    color: #ff0000;
+}
+
+.blue {
+    color: #0000ff;
+}
+
+.green {
+    color: #00ff00;
+}
+
+h3 {
+    font-weight: normal;
+}

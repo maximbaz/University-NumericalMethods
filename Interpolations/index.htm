@@ -1,0 +1,83 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Интерполяция методами Лагранжа и кубических сплайнов</title>
+        <script src="../jquery.min.js"></script>
+        <script src="Lagrange.js"></script>
+        <script src="CubicSplines.js"></script>
+        <script src="Graph.js"></script>
+        <script src="GUI.js"></script>
+        <link rel="stylesheet" type="text/css" href="../style.css" />
+    </head>
+	<body>
+      <figure>
+          <img src="../My-photo.png" alt="Maxim Baz" />
+          <figcaption>
+              <p>Максим Базь</p>
+              <p><a href="http://z0rch.com">http://z0rch.com</a></p>
+          </figcaption>
+      </figure>
+      <div id="header">
+        <h1>Интерполяция методами Лагранжа и кубических сплайнов.</h1>
+        <h3>Для построения интерполяционной кривой необходимо ввести все начальные условия и выбрать количество разбиений.<br />
+        На графике красной кривой обозначен <span class="red">метод Лагранжа</span>, синей кривой &mdash; <span class="blue">метод кубических сплайнов</span>.</h3>
+      </div>
+	    <canvas id="graph" width="1000" height="500"></canvas>
+      <div>
+        <span class="name">Количество разбиений</span>
+        <input style="width: 800px; position: relative; top: 6px; margin: 0 10px;" type="range" min="1" max="10" step="1" id="step">
+        <span class="value" style="background: lightgray; padding: 10px; border-radius: 6px;"></span>
+      </div>
+	    <div style="margin-top: 10px;">
+	        <div style="position: relative; top: 17px; left: 200px;">X:<input style="width: 790px;position: relative; left: 5px;" type="text" id="x"></div>
+	        <span style="position: relative;top: 7px;">Результаты экспериментов</span>
+	        <div style="position: relative; top: 0.7px; left: 200px;">F:<input style="width: 790px;position: relative; left: 8px;" type="text" id="f"></div>
+	    </div>
+        <button id="zoomMinus">-</button>
+        <button id="zoomPlus">+</button>
+	    <script>
+			var table = {
+				x: [-1,3,5,7,10],
+				f: [10,2,5,3,8]
+			};
+			
+			$("#step").change(function() {
+				var value = parseInt($(this).val());
+				$(this).parent().find("span.value").text(value);
+			    
+			    for (var i = 0, l = gui.graphs.length; i < l; i++)
+			        gui.graphs[i].step = value;
+			    gui.updateCanvas();
+			});
+			
+			$("#zoomMinus").click(function() {
+			    if(gui.zoom <= 10)
+			        return;
+			    gui.zoom -= 10;
+			    gui.updateCanvas();
+			});
+			
+			$("#zoomPlus").click(function() {
+			    if(gui.zoom >= 100)
+			        return;
+			    gui.zoom += 10;
+			    gui.updateCanvas();
+			});
+
+			$("#x, #f").change(function () {
+			    var values = $(this).val().split(",");
+			    for (var i = 0, l = values.length; i < l; i++)
+			        values[i] = parseFloat(values[i]);
+			    table[$(this).attr("id")] = values;
+			    gui.updateCanvas();
+			});
+			
+			$(function () {
+                window.gui = new GUI($("#graph")[0], [new Lagrange(table), new CubicSplines(table)], table);
+			    $("#step").val(7).parent().find("span.value").text(7);
+			    $("#x").val(table.x.toString());
+			    $("#f").val(table.f.toString());
+			});
+    	</script>
+	</body>
+</html>

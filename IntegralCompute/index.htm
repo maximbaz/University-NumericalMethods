@@ -1,0 +1,49 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Численное интегрирование</title>
+        <script src="../jquery.min.js"></script>
+        <script src="../knockout-2.0.0.js"></script>
+        <script src="Integral.js"></script>
+        <script src="viewModel.js"></script>
+        <script src="GUI.js"></script>
+        <link rel="stylesheet" type="text/css" href="../style.css" />
+        <style>
+            .range { width: 40px; }
+            #function { width: 220px; }
+        </style>
+    </head>
+	<body>
+      <figure>
+          <img src="../My-photo.png" alt="Maxim Baz" />
+          <figcaption>
+              <p>Максим Базь</p>
+              <p><a href="http://z0rch.com">http://z0rch.com</a></p>
+          </figcaption>
+      </figure>
+      <div id="header">
+        <h1>Численное интегрирование методом Симпсона с оценкой погрешности по методу Рунге.</h1>
+        <h3>Для вычисления интеграла и построения интегральной кривой необходимо ввести исходную функцию, все начальные условия и выбрать количество разбиений.<br />
+        На графике красной кривой обозначена <span class="red">интегральная кривая</span>, зелеными линиями &mdash; <span class="green">разбиения</span>.</h3>
+      </div>
+	    <canvas id="graph" width="1000" height="500"></canvas>
+	    <p>
+	        Функция: <input id="function" data-bind="value: func, valueUpdate: 'afterkeydown'" />
+            x = [<input data-bind="value: from, valueUpdate: 'afterkeydown'" class="range" type="number"/>, 
+	        <input data-bind="value: to, valueUpdate: 'afterkeydown'" class="range" type="number"/>]
+	    </p>
+	    <p>
+	        Step = <input data-bind="value: step, valueUpdate: 'afterkeydown'" type="number"/>
+	        Epsilon = <input data-bind="value: epsilon, valueUpdate: 'afterkeydown'" type="number"/>
+	    </p>    
+        <p><span>Интеграл = </span><span data-bind="text: integralValue"></span></p>
+	    <button data-bind="click: zoomMinus">-</button>
+        <button data-bind="click: zoomPlus">+</button>
+	    <script>
+	        $(function () {
+			    viewModel.gui(new GUI($("#graph")[0]));
+                ko.applyBindings(viewModel);
+			});
+    	</script>
+	</body>
+</html>
