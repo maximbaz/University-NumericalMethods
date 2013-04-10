@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Численное интегрирование</title>
-        <script src="../jquery.min.js"></script>
-        <script src="../knockout-2.0.0.js"></script>
+        <script src="http://z0rch.com/js/jquery-1.9.1.min.js"></script>
+        <script src="http://z0rch.com/js/knockout-2.2.1.js"></script>
         <script src="Integral.js"></script>
         <script src="viewModel.js"></script>
         <script src="GUI.js"></script>
@@ -15,7 +15,7 @@
     </head>
 	<body>
       <figure>
-          <img src="../My-photo.png" alt="Maxim Baz" />
+          <img src="http://z0rch.com/img/My-photo.png" alt="Maxim Baz" />
           <figcaption>
               <p>Максим Базь</p>
               <p><a href="http://z0rch.com">http://z0rch.com</a></p>
@@ -29,13 +29,13 @@
 	    <canvas id="graph" width="1000" height="500"></canvas>
 	    <p>
 	        Функция: <input id="function" data-bind="value: func, valueUpdate: 'afterkeydown'" />
-            x = [<input data-bind="value: from, valueUpdate: 'afterkeydown'" class="range" type="number"/>, 
+            x = [<input data-bind="value: from, valueUpdate: 'afterkeydown'" class="range" type="number"/>,
 	        <input data-bind="value: to, valueUpdate: 'afterkeydown'" class="range" type="number"/>]
 	    </p>
 	    <p>
 	        Step = <input data-bind="value: step, valueUpdate: 'afterkeydown'" type="number"/>
 	        Epsilon = <input data-bind="value: epsilon, valueUpdate: 'afterkeydown'" type="number"/>
-	    </p>    
+	    </p>
         <p><span>Интеграл = </span><span data-bind="text: integralValue"></span></p>
 	    <button data-bind="click: zoomMinus">-</button>
         <button data-bind="click: zoomPlus">+</button>

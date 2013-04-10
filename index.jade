@@ -1,0 +1,39 @@
+extends ../z0rch.github.com/layout
+
+block variables
+    - title = "Numerical Methods"
+
+prepend navigation
+    ul.nav
+        li
+            a(href='#labs', data-bind="click: _.partial(flash.do, '#labs')") Numerical Methods
+
+block page-header
+    h2: a(href='./') Numerical Methods
+    br
+
+block content
+    table#labs.table.table-bordered
+        thead
+            tr
+                th Title
+                th Description
+                th Link
+
+        tbody(data-bind="foreach: labs.list")
+            tr
+                td(data-bind="text: name")
+                td(data-bind="text: description")
+                td: a.btn(data-bind="attr: {href: url}", target="_blank") Open in new tab
+
+append scripts
+    include ./coffee/LabsListViewModel.coffee
+    include ./coffee/AppViewModel.coffee
+
+    :coffeescript
+        ko.applyBindings new AppViewModel
+
+
+
+
+

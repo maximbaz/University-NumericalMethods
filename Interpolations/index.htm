@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Интерполяция методами Лагранжа и кубических сплайнов</title>
-        <script src="../jquery.min.js"></script>
+        <script src="http://z0rch.com/js/jquery-1.9.1.min.js"></script>
         <script src="Lagrange.js"></script>
         <script src="CubicSplines.js"></script>
         <script src="Graph.js"></script>
@@ -11,7 +11,7 @@
     </head>
 	<body>
       <figure>
-          <img src="../My-photo.png" alt="Maxim Baz" />
+          <img src="http://z0rch.com/img/My-photo.png" alt="Maxim Baz" />
           <figcaption>
               <p>Максим Базь</p>
               <p><a href="http://z0rch.com">http://z0rch.com</a></p>
@@ -40,23 +40,23 @@
 				x: [-1,3,5,7,10],
 				f: [10,2,5,3,8]
 			};
-			
+
 			$("#step").change(function() {
 				var value = parseInt($(this).val());
 				$(this).parent().find("span.value").text(value);
-			    
+
 			    for (var i = 0, l = gui.graphs.length; i < l; i++)
 			        gui.graphs[i].step = value;
 			    gui.updateCanvas();
 			});
-			
+
 			$("#zoomMinus").click(function() {
 			    if(gui.zoom <= 10)
 			        return;
 			    gui.zoom -= 10;
 			    gui.updateCanvas();
 			});
-			
+
 			$("#zoomPlus").click(function() {
 			    if(gui.zoom >= 100)
 			        return;
@@ -71,7 +71,7 @@
 			    table[$(this).attr("id")] = values;
 			    gui.updateCanvas();
 			});
-			
+
 			$(function () {
                 window.gui = new GUI($("#graph")[0], [new Lagrange(table), new CubicSplines(table)], table);
 			    $("#step").val(7).parent().find("span.value").text(7);
